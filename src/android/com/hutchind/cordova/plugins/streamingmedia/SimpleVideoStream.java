@@ -32,6 +32,7 @@ MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener {
 	private ProgressBar mProgressBar = null;
 	private String mVideoUrl;
 	private Boolean mShouldAutoClose = true;
+	private Boolean mCloseOnVideoTouch = true;
 	private boolean mControls;
 
 	@Override
@@ -55,6 +56,7 @@ MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener {
 		Bundle b = getIntent().getExtras();
 		mVideoUrl = b.getString("mediaUrl");
 		mShouldAutoClose = b.getBoolean("shouldAutoClose", true);
+		mCloseOnVideoTouch = b.getBoolean("closeOnVideoTouch", true);
 		mControls = b.getBoolean("controls", true);
 
 		RelativeLayout relLayout = new RelativeLayout(this);
