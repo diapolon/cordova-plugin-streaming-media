@@ -34,11 +34,36 @@ MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener {
 	private Boolean mShouldAutoClose = true;
 	private boolean mControls;
 
+
+	private Boolean mCloseOnLongTap = false;
+
+	final Context context = this;
+	final GestureDetector.SimpleOnGestureListener listener = new GestureDetector.SimpleOnGestureListener() {
+		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			Log.d("Debug", "onDoubleTap");
+			return true;
+		}
+		@Override
+		public void onLongPress(MotionEvent e) {
+			Log.d("Debug", "onLongPress");
+			if( mCloseOnLongTap ) {
+				StringBuilder sb = new StringBuilder();
+				sb.append("touched");
+				wrapItUp(RESULT_OK, sb.toString());
+			}
+		}
+	};
+	final GestureDetector detector = new GestureDetector(listener);
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
+		detector.setOnDoubleTapListener(listener);
+		detector.setIsLongpressEnabled(true);
 		
 		// VISIV START
 		if(Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
@@ -55,6 +80,7 @@ MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener {
 		Bundle b = getIntent().getExtras();
 		mVideoUrl = b.getString("mediaUrl");
 		mShouldAutoClose = b.getBoolean("shouldAutoClose", true);
+		mCloseOnLongTap = b.getBoolean("closeOnLongTap", false);
 		mControls = b.getBoolean("controls", true);
 
 		RelativeLayout relLayout = new RelativeLayout(this);
@@ -213,10 +239,17 @@ MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("touched");
-		wrapItUp(RESULT_OK, sb.toString());
-		finish();
+
+		if( mCloseOnLongTap == false ) {
+			StringBuilder sb = new StringBuilder();
+			sb.append("touched");
+			wrapItUp(RESULT_OK, sb.toString());
+			finish();
+		}else{
+			detector.onTouchEvent(event);
+			if (mMediaController != null)
+				mMediaController.show();
+		}
 		return false;
 	}
 }
