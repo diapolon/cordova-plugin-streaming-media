@@ -1,10 +1,12 @@
 package com.hutchind.cordova.plugins.streamingmedia;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.media.MediaPlayer;
+import android.view.GestureDetector;
 import android.widget.MediaController;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
