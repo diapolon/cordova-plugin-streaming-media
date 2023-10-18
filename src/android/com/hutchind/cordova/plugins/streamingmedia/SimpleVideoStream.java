@@ -51,7 +51,7 @@ MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener {
 			Log.d("Debug", "onLongPress");
 			if( mCloseOnLongTap ) {
 				StringBuilder sb = new StringBuilder();
-				sb.append("touched");
+				sb.append("exitOnLongPress");
 				wrapItUp(RESULT_OK, sb.toString());
 			}
 		}
