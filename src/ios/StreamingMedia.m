@@ -109,6 +109,10 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     [self play:command type:[NSString stringWithString:TYPE_VIDEO]];
 }
 
+-(void)stopVideo:(CDVInvokedUrlCommand *) command {
+    [self stop:command type:[NSString stringWithString:TYPE_VIDEO]];
+}
+
 -(void)playAudio:(CDVInvokedUrlCommand *) command {
     NSLog(@"playaudio called");
     [self ignoreMute];
