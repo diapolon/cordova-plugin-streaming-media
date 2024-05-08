@@ -99,9 +99,8 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     NSLog(@"stop called");
     callbackId = command.callbackId;
     if (moviePlayer.player) {
-        if([type isEqualToString:TYPE_AUDIO]) {
-            [moviePlayer.player pause];
-        } else {
+        [moviePlayer.player pause];
+        if([type isEqualToString:TYPE_VIDEO]) {            
             [self cleanup];
         }        
     }
