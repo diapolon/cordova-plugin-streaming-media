@@ -54,6 +54,10 @@ public class StreamingMedia extends CordovaPlugin {
 		return play(SimpleVideoStream.class, url, options);
 	}
 
+	private boolean closeVideo() {
+		return false;
+	}
+
 	private boolean play(final Class activityClass, final String url, final JSONObject options) {
 		final CordovaInterface cordovaObj = cordova;
 		final CordovaPlugin plugin = this;
