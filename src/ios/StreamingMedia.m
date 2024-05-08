@@ -100,6 +100,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     callbackId = command.callbackId;
     if (moviePlayer.player) {
         [moviePlayer.player pause];
+        [self cleanup];
     }
 }
 
