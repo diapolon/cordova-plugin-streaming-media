@@ -57,8 +57,9 @@ public class StreamingMedia extends CordovaPlugin {
 		return play(SimpleVideoStream.class, url, options);
 	}
 
-	private boolean stopVideo() {
-		return false;
+	private boolean stopVideo() {		
+		cordova.getActivity().finishActivity(ACTIVITY_CODE_PLAY_MEDIA);
+		return true;
 	}
 
 	private boolean play(final Class activityClass, final String url, final JSONObject options) {
