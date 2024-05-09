@@ -37,8 +37,7 @@
 			</feature>
 		</config-file>
 		<config-file target="*-Info.plist" parent="UIBackgroundModes">
-			<array>
-				<string>audio</string>
+			<array>				
 				<string>fetch</string>
 			</array>
 		</config-file>
