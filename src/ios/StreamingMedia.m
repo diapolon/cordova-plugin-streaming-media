@@ -58,31 +58,6 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     } else {
         controls = YES;
     }
-    
-    if ([type isEqualToString:TYPE_AUDIO]) {
-        videoType = TYPE_AUDIO;
-        
-        // bgImage
-        // bgImageScale
-        if (![options isKindOfClass:[NSNull class]] && [options objectForKey:@"bgImage"]) {
-            NSString *imageScale = DEFAULT_IMAGE_SCALE;
-            if (![options isKindOfClass:[NSNull class]] && [options objectForKey:@"bgImageScale"]) {
-                imageScale = [options objectForKey:@"bgImageScale"];
-            }
-            [self setImage:[options objectForKey:@"bgImage"] withScaleType:imageScale];
-        }
-        // bgColor
-        if (![options isKindOfClass:[NSNull class]] && [options objectForKey:@"bgColor"]) {
-            NSLog(@"Found option for bgColor");
-            [self setBackgroundColor:[options objectForKey:@"bgColor"]];
-        } else {
-            backgroundColor = [UIColor blackColor];
-        }
-    } else {
-        // Reset overlay on video player after playing audio
-        [self cleanup];
-    }
-    // No specific options for video yet
 }
 
 -(void)play:(CDVInvokedUrlCommand *) command type:(NSString *) type {
