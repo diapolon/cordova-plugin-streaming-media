@@ -90,12 +90,6 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     [self stop:command type:[NSString stringWithString:TYPE_VIDEO]];
 }
 
-// Ignore the mute button
--(void)ignoreMute {
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-}
-
 -(void) setBackgroundColor:(NSString *)color {
     NSLog(@"setbackgroundcolor called");
     if ([color hasPrefix:@"#"]) {
@@ -201,16 +195,6 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
         [moviePlayer.player play];
     }];
     
-    // add audio image and background color
-    if ([videoType isEqualToString:TYPE_AUDIO]) {
-        if (imageView != nil) {
-            [moviePlayer.contentOverlayView setAutoresizesSubviews:YES];
-            [moviePlayer.contentOverlayView addSubview:imageView];
-        }
-        moviePlayer.contentOverlayView.backgroundColor = backgroundColor;
-        [self.viewController.view addSubview:moviePlayer.view];
-    }
-    
     // setup listners
     [self handleListeners];
 }
@@ -299,22 +283,10 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
 - (void) appDidEnterBackground:(NSNotification*)notification {
     NSLog(@"appDidEnterBackground");
-    
-    if (moviePlayer && movie && videoType == TYPE_AUDIO)
-    {
-        NSLog(@"did set player layer to nil");
-        [moviePlayer setPlayer: nil];
-    }
 }
 
 - (void) appDidBecomeActive:(NSNotification*)notification {
-    NSLog(@"appDidBecomeActive");
-    
-    if (moviePlayer && movie && videoType == TYPE_AUDIO)
-    {
-        NSLog(@"did reinstate playerlayer");
-        [moviePlayer setPlayer:movie];
-    }
+    NSLog(@"appDidBecomeActive");    
 }
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
