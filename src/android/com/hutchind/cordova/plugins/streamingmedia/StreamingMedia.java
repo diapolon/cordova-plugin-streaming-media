@@ -17,8 +17,6 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 
 public class StreamingMedia extends CordovaPlugin {
-	public static final String ACTION_PLAY_AUDIO = "playAudio";
-	public static final String ACTION_PLAY_VIDEO = "playVideo";
 	public static final String ACTION_STOP_VIDEO = "stopVideo";
 
 	private static final int ACTIVITY_CODE_PLAY_MEDIA = 7;
@@ -38,9 +36,7 @@ public class StreamingMedia extends CordovaPlugin {
 			// Developer provided no options. Leave options null.
 		}
 
-		if (ACTION_PLAY_AUDIO.equals(action)) {
-			return playAudio(args.getString(0), options);
-		} else if (ACTION_PLAY_VIDEO.equals(action)) {
+		if (ACTION_PLAY_VIDEO.equals(action)) {
 			return playVideo(args.getString(0), options);
 		} else if (ACTION_STOP_VIDEO.equals(action)) {
 			return stopVideo();
@@ -49,10 +45,7 @@ public class StreamingMedia extends CordovaPlugin {
 			return false;
 		}
 	}
-
-	private boolean playAudio(String url, JSONObject options) {
-		return play(SimpleAudioStream.class, url, options);
-	}
+	
 	private boolean playVideo(String url, JSONObject options) {
 		return play(SimpleVideoStream.class, url, options);
 	}
