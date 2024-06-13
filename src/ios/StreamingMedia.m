@@ -90,16 +90,6 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     [self stop:command type:[NSString stringWithString:TYPE_VIDEO]];
 }
 
--(void)playAudio:(CDVInvokedUrlCommand *) command {
-    NSLog(@"playaudio called");
-    [self ignoreMute];
-    [self play:command type:[NSString stringWithString:TYPE_AUDIO]];
-}
-
--(void)stopAudio:(CDVInvokedUrlCommand *) command {
-    [self stop:command type:[NSString stringWithString:TYPE_AUDIO]];
-}
-
 // Ignore the mute button
 -(void)ignoreMute {
     AVAudioSession *session = [AVAudioSession sharedInstance];
