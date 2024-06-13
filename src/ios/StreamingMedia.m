@@ -30,7 +30,6 @@
 }
 
 NSString * const TYPE_VIDEO = @"VIDEO";
-NSString * const TYPE_AUDIO = @"AUDIO";
 NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
 -(void)parseOptions:(NSDictionary *)options type:(NSString *) type {
